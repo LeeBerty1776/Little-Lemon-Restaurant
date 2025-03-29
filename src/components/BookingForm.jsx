@@ -23,6 +23,14 @@ export default function BookingForm() {
       submitForm(formData)
    }
 
+   const validate = () => {
+      return (formData.date
+         && formData.time
+         && Number(formData.guests) >= 1
+         && Number(formData.guests) <= 10
+         && formData.occasion)
+   }
+
    useEffect(() => {
       if (!formData.date) {
          availableTimesDispatch({type: "initialize"})
@@ -34,14 +42,14 @@ export default function BookingForm() {
   return (
 <form onSubmit={handleSubmit}>
    <fieldset className="fieldset bg-base-200 border border-base-300 p-4 rounded-box">
-      <label className='input paragraph-text'>
+      <label className='paragraph-text input validator'>
          <span className='label'>Choose date</span>
-         <input type="date" name='date' value={formData.date} onChange={handleChange}/>
+         <input type="date" name='date' value={formData.date} onChange={handleChange} min={new Date().toISOString().split("T")[0]} required/>
       </label>
 
-      <label className='select pl-3 paragraph-text'>
+      <label className='select pl-3 paragraph-text validator'>
          <span className="label">Choose time</span>
-         <select name='time' value={formData.time} onChange={handleChange}>
+         <select name='time' value={formData.time} onChange={handleChange} required>
             <option hidden></option>
             {
                availableTimes ? 
@@ -51,21 +59,22 @@ export default function BookingForm() {
          </select>
       </label>
       
-      <label className='input paragraph-text'>
+      <label className='input paragraph-text validator'>
          <span className="label">Number of guests</span>
-         <input type="number" name='guests' placeholder="1" min="1" max="10" value={formData.guests} onChange={handleChange}/>
+         <input required type="number" name='guests' min="1" max="10" value={formData.guests} onChange={handleChange}/>
       </label>
+
       
-      <label className='select pl-3 paragraph-text'>
+      <label className='validator select pl-3 paragraph-text'>
          <span className="label">Occasion</span>
-         <select name='occasion' value={formData.occasion} onChange={handleChange}>
+         <select name='occasion' value={formData.occasion} onChange={handleChange} required>
             <option hidden></option>
             <option value="birthday">Birthday</option>
             <option value="anniversary">Anniversary</option>
          </select>
       </label>
 
-      <input className='lead-text btn btn-primary' type="submit" value="Make Your Reservation" />
+      <input className='lead-text btn btn-primary' type="submit" value="Make Your Reservation" disabled={!validate()} />
    </fieldset>
 </form>
   )
