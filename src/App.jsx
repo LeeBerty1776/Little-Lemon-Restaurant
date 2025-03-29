@@ -4,6 +4,7 @@ import RootLayout from "./layouts/RootLayout"
 import Home from "./pages/Home"
 import Order from "./pages/Order"
 import Reserve from "./pages/Reserve"
+import ConfirmedBooking from "./pages/ConfirmedBooking"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -11,6 +12,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="reserve" element={<Reserve />}/>
       <Route path="order" element={<Order />} />
+      <Route path="confirmed" element={<ConfirmedBooking />} />
     </Route>
   )
 )

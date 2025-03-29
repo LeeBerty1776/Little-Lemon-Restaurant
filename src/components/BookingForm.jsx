@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 
 export default function BookingForm() {
-   const {availableTimes, availableTimesDispatch} = useOutletContext()
+   const {availableTimes, availableTimesDispatch, submitForm} = useOutletContext()
 
    const [formData, setFormData] = useState({
          date: "",
@@ -18,6 +18,11 @@ export default function BookingForm() {
       })
    }
 
+   const handleSubmit = e => {
+      e.preventDefault()
+      submitForm(formData)
+   }
+
    useEffect(() => {
       if (!formData.date) {
          availableTimesDispatch({type: "initialize"})
@@ -27,7 +32,7 @@ export default function BookingForm() {
    }, [formData.date])
 
   return (
-<form>
+<form onSubmit={handleSubmit}>
    <fieldset className="fieldset bg-base-200 border border-base-300 p-4 rounded-box">
       <label className='input paragraph-text'>
          <span className='label'>Choose date</span>

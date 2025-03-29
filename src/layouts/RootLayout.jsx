@@ -1,8 +1,8 @@
-import { Outlet} from "react-router-dom"
+import { Navigate, Outlet, useNavigate} from "react-router-dom"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import { useReducer} from "react";
-import {fetchAPI} from "../utils/api"
+import {fetchAPI, submitAPI} from "../utils/api"
 
 
 export const initializeTimes = () => {
@@ -23,12 +23,19 @@ const availableTimesReducer = (state, action) => {
 
 export default function RootLayout() {
   const [availableTimes, availableTimesDispatch] = useReducer(availableTimesReducer, null);
+  const navigate = useNavigate();
+
+  const submitForm = (formData) => {
+    if (submitAPI(formData)) {
+      navigate("/confirmed")
+    }
+  }
 
   return (
     <>
         <Header />
         <main>
-            <Outlet context={{availableTimes, availableTimesDispatch}}/>
+            <Outlet context={{availableTimes, availableTimesDispatch, submitForm}}/>
         </main>
         <Footer />
     </>

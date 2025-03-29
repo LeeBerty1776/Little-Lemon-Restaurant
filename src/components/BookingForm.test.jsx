@@ -8,7 +8,7 @@ vi.mock('react-router-dom', () => ({
     useOutletContext: vi.fn()
 }))
 
-useOutletContext.mockReturnValue({availableTimes:["1:00"], availableTimesDispatch: vi.fn()})
+useOutletContext.mockReturnValue({availableTimes:["1:00"], availableTimesDispatch: vi.fn(), submitForm: vi.fn()})
 
 test("static text should render", () => {
     render(<BookingForm />)
