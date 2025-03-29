@@ -2,14 +2,14 @@ import { Outlet} from "react-router-dom"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import { useReducer} from "react";
-import {fetchAPI, submitAPI} from "../utils/api"
+import {fetchAPI} from "../utils/api"
 
 
-const initializeTimes = () => {
+export const initializeTimes = () => {
   return fetchAPI(new Date())
 }
 
-const updateTimes = (date) => {
+export const updateTimes = (date) => {
   return fetchAPI(date)
 }
 

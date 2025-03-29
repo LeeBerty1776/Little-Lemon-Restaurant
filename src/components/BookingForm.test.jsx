@@ -1,10 +1,19 @@
 import { render, screen } from "@testing-library/react"
-import BookingForm from "./BookingForm"
+import BookingForm from "./BookingForm";
+import { vi } from "vitest";
+import { useOutletContext } from "react-router-dom";
 
+vi.mock('react-router-dom', () => ({
+    ...vi.importActual('react-router-dom'),
+    useOutletContext: vi.fn()
+}))
 
-test("Test for some static text being rendered in the BookingForm component", () => {
+useOutletContext.mockReturnValue({availableTimes:["1:00"], availableTimesDispatch: vi.fn()})
+
+test("static text should render", () => {
     render(<BookingForm />)
+
     const dateLabel = screen.getByText("Choose date")
 
-    expect(document.body.contains(dateLabel)).toBe(true)
+    expect(dateLabel).toBeTruthy()
 })
