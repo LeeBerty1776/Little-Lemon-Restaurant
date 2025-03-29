@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Markazi+Text:wght@400..700&display=swap');
+
+@import "tailwindcss";
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+    name: "light";
+    default: true;
+    prefersdark: true;
+    --color-base-100: #F4F8F9;
+    --color-base-200: #EDEFEE;
+    --color-base-300: #D1D6D8;
+    --color-base-content: #333333;
+    --color-primary: #f4ce14;
+    --color-primary-content: #333333;
+    --color-secondary: #495e57;
+    --color-secondary-content: 	#EDEFEE;
+    --color-neutral: #333333;
+    --color-neutral-content: 	#EDEFEE;
+  }
+
+.display-title, .sub-title {
+    font-family: "Markazi Text", serif;
+}
+.lead-text, .section-title, .section-cateories, .card-title, .paragraph-text, .highlight-text {
+    font-family: "Karla", sans-serif;
+}
+.display-title {
+    font-weight: 500;
+    font-size: 64px;
+}
+.sub-title {
+    font-size: 40px;
+    margin-top: -1em;
+}
+.lead-text {
+    font-weight: 500;
+    font-size: 18px;
+}
+.section-title {
+    font-weight: 800;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+.section-categories {
+    font-weight: 800;
+    font-size: 16px;
+}
+.card-title-font {
+    font-weight: 700;
+    font-size: 18px;
+}
+.paragraph-text {
+    font-size: 16px;
+    line-height: 1.5;
+}
+.highlight-text {
+    font-weight: 500;
+    font-size: 16px;
+}
