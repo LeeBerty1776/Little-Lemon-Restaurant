@@ -1,35 +1,36 @@
-import { Outlet, useLoaderData} from "react-router-dom"
+import { Outlet} from "react-router-dom"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
-import { useEffect, useState } from "react";
+import { useReducer} from "react";
+import {fetchAPI, submitAPI} from "../utils/api"
+
+
+const initializeTimes = () => {
+  return fetchAPI(new Date())
+}
+
+const updateTimes = (date) => {
+  return fetchAPI(date)
+}
+
+const availableTimesReducer = (state, action) => {
+  switch(action.type) {
+    case "initialize": return initializeTimes();
+    case "update": return updateTimes(action.payload);
+    default: return state;
+  }
+}
 
 export default function RootLayout() {
-  const loaderData = useLoaderData();
-  const [availableTimes, setAvailableTimes] = useState();
-  useEffect( () => {
-    if (loaderData.availableTimes instanceof Promise){
-      loaderData.availableTimes.then(times => setAvailableTimes(times))
-    } else {
-      setAvailableTimes(loaderData.availableTimes)
-    }
-  } , [loaderData.availableTimes])
+  const [availableTimes, availableTimesDispatch] = useReducer(availableTimesReducer, null);
 
   return (
     <>
         <Header />
         <main>
-            <Outlet context={availableTimes}/>
+            <Outlet context={{availableTimes, availableTimesDispatch}}/>
         </main>
         <Footer />
     </>
   )
-}
-
-export async function availableTimesLoader() {
-  const promise = new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([1, 2, 3, 4, 5]);
-    }, 2000); 
-  });
-  return {availableTimes: promise}
 }

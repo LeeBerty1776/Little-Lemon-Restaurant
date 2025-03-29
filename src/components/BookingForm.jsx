@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 
 export default function BookingForm() {
-   const availableTimes = useOutletContext()
+   const {availableTimes, availableTimesDispatch} = useOutletContext()
 
    const [formData, setFormData] = useState({
          date: "",
@@ -17,6 +17,14 @@ export default function BookingForm() {
          [e.target.name]: e.target.value
       })
    }
+
+   useEffect(() => {
+      if (!formData.date) {
+         availableTimesDispatch({type: "initialize"})
+      } else {
+         availableTimesDispatch({type: "update", payload: new Date(formData.date)})
+      }
+   }, [formData.date])
 
   return (
 <form>
