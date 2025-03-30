@@ -42,14 +42,14 @@ export default function BookingForm() {
   return (
 <form onSubmit={handleSubmit}>
    <fieldset className="fieldset bg-base-200 border border-base-300 p-4 rounded-box">
-      <label className='paragraph-text input validator'>
+      <label className='paragraph-text input validator' htmlFor='date'>
          <span className='label'>Choose date</span>
-         <input type="date" name='date' value={formData.date} onChange={handleChange} min={new Date().toISOString().split("T")[0]} required/>
+         <input type="date" name='date' value={formData.date} onChange={handleChange} min={new Date().toISOString().split("T")[0]} required id='date'/>
       </label>
 
-      <label className='select pl-3 paragraph-text validator'>
+      <label className='select pl-3 paragraph-text validator' htmlFor='time'>
          <span className="label">Choose time</span>
-         <select name='time' value={formData.time} onChange={handleChange} required>
+         <select name='time' value={formData.time} onChange={handleChange} required id='time'>
             <option hidden></option>
             {
                availableTimes ? 
@@ -59,15 +59,15 @@ export default function BookingForm() {
          </select>
       </label>
       
-      <label className='input paragraph-text validator'>
+      <label className='input paragraph-text validator' htmlFor='guests'>
          <span className="label">Number of guests</span>
-         <input required type="number" name='guests' min="1" max="10" value={formData.guests} onChange={handleChange}/>
+         <input required type="number" name='guests' min="1" max="10" value={formData.guests} onChange={handleChange} id='guests' />
       </label>
 
       
-      <label className='validator select pl-3 paragraph-text'>
+      <label className='validator select pl-3 paragraph-text' htmlFor='occasion'>
          <span className="label">Occasion</span>
-         <select name='occasion' value={formData.occasion} onChange={handleChange} required>
+         <select name='occasion' value={formData.occasion} onChange={handleChange} required id='occasion'>
             <option hidden></option>
             <option value="birthday">Birthday</option>
             <option value="anniversary">Anniversary</option>
